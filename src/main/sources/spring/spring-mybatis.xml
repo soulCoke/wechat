@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd 
+       http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+
+
+	<!-- 导入数据源配置 -->
+	<import resource="classpath*:spring/spring-druid.xml" />
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- mybatis 配置 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 接口名称和mapper名称一样的话，就不用配置mapperLocation -->
+		<property name="basePackage" value="com.wechat.persistence" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+	<!--配置事务异常封装 -->
+	<bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	
+	
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="typeAliasesPackage" value="com.ssm.core.po" />
+<!-- 		<property name="plugins">
+			<array>
+				<bean class="com.jiumai.carnet.rw.sharding.DynamicPlugin" />
+			</array>
+		</property> -->
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.ssm.core.persistence" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+
+	<!--声明式容器事务管理 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="insert*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="save*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="del*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="remove*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="edit*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="login*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="process*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="get*" propagation="SUPPORTS" />
+			<tx:method name="find*" propagation="SUPPORTS" />
+			<tx:method name="requiresNew*" propagation="REQUIRES_NEW" rollback-for="java.lang.Exception" />
+			<tx:method name="do*" propagation="NOT_SUPPORTED" />
+			<!-- <tx:method name="*" read-only="true" /> -->
+		</tx:attributes>
+	</tx:advice>
+
+	<!--只对业务逻辑层实施事务 -->
+	<aop:config expose-proxy="true">
+		<aop:pointcut id="txPointcut" expression="(execution(* com.ssm.core.service.*.*(..))) 
+		" />
+		<aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice" />
+	</aop:config>
+</beans>
