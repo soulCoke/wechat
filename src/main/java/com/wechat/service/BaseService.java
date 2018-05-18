@@ -1,6 +1,7 @@
 package com.wechat.service;
 
-import com.sun.tools.javac.util.List;
+import java.util.List;
+
 import com.wechat.base.bean.BusinessException;
 
 

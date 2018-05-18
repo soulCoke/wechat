@@ -3,14 +3,9 @@ package com.wechat.common.utils.wx;
 import java.io.InputStream;
 import java.io.Writer;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.QuickWriter;
@@ -133,7 +128,7 @@ public class MessageUtil {
     public static Map<String, String> parseXml(HttpServletRequest request) throws Exception {
         // 将解析结果存储在HashMap中
         Map<String, String> map = new HashMap<String, String>();
-        
+/*        
         // 从request中取得输入流
         InputStream inputStream = request.getInputStream();
         // 读取输入流
@@ -151,7 +146,7 @@ public class MessageUtil {
         // 释放资源
         inputStream.close();
         inputStream = null;
-
+*/
         return map;
     }
     
@@ -171,7 +166,7 @@ public class MessageUtil {
 		
 		// 解析XML
 		InputStream inputStream = request.getInputStream();
-		
+		/*
 		SAXReader reader = new SAXReader();
 		Document document = reader.read(inputStream);
 		Element root = document.getRootElement();
@@ -216,7 +211,7 @@ public class MessageUtil {
 		}
 		
 		inputStream.close();
-		inputStream = null;
+		inputStream = null;*/
 		return msgReq;
 	}
 

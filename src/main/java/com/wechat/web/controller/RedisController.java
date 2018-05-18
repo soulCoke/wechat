@@ -17,6 +17,7 @@ import com.wechat.base.bean.redis.RedisCacheUtil;
  * @version V1.0  
 */  
 @Controller
+@RequestMapping("/redis")
 public class RedisController {
 
 	

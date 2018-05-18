@@ -29,71 +29,78 @@ import com.wechat.service.WxService;
 @Controller
 public class WeChatContrller extends BaseController {
 
-	private static Logger log = LoggerFactory.getLogger(WeChatContrller.class);
-	@Autowired
-	private WxService wxService;
+    private static Logger log = LoggerFactory.getLogger(WeChatContrller.class);
+    @Autowired
+    private WxService wxService;
 
-	/**
-	 * @Title: checkSignature
-	 * @Description:接入管理
-	 * @author yuanliyang
-	 * @date 2018年5月6日 下午3:40:13
-	 * @param @param signature
-	 * @param @param nonce
-	 * @param @param timestamp
-	 * @param @param echostr
-	 * @param @param account
-	 * @param @return 参数
-	 * @return String 返回类型
-	 * @throws
-	 */
-	@RequestMapping(value = "/{account}/message", method = RequestMethod.GET)
-	@ResponseBody
-	public String checkSignature(
-			@RequestParam(name = "signature", required = false) String signature,
-			@RequestParam(name = "nonce", required = false) String nonce,
-			@RequestParam(name = "timestamp", required = false) String timestamp,
-			@RequestParam(name = "echostr", required = false) String echostr,
-			@PathVariable String account) {
-		log.info("get有消息来了！");
-		// 通过检验signature对请求进行校验，若校验成功则原样返回echostr，表示接入成功，否则接入失败
-		log.info("接收参数:" + "===========signature:" + signature
-				+ "===========timestamp:" + timestamp + "===========nonce:"
-				+ nonce);
-		Boolean flag = false;
-		WxAccount ap = RedisCacheUtil.get(account, WxAccount.class);
-		try {
-			flag = SignUtil.checkSignature(ap.getToken(), signature, timestamp,
-					nonce);
-		} catch (Exception e) {
-			flag = false;
-		}
-		if (flag) {
-			log.info("接入成功");
-			return echostr;
-		}
-		log.error("接入失败");
-		return "";
-	}
+    /**
+     * @Title: views
+     * @Description:
+     * @author yuanliyang
+     * @date 2018年5月8日 下午6:42:58
+     * @param @param path
+     * @param @return
+     * @return String
+     * @throws
+     */
+    @RequestMapping(value = "/{path}", method = RequestMethod.GET)
+    public String views(@PathVariable String path) {
+	return path;
+    }
 
-	/**
-	 * @Title: weChatMsg
-	 * @Description:处理公众号信息
-	 * @author yuanliyang
-	 * @date 2018年5月6日 下午3:40:28
-	 * @param @param req
-	 * @param @param rep
-	 * @param @param account
-	 * @param @return 参数
-	 * @return String 返回类型
-	 * @throws
-	 */
-	@RequestMapping(value = "/{account}/message", method = RequestMethod.POST)
-	@ResponseBody
-	public String weChatMsg(HttpServletRequest req, HttpServletResponse rep,@PathVariable String account) {
-		WxAccount ap = RedisCacheUtil.get(account, WxAccount.class);
-		String respMessage = wxService.processMsg(req, ap);
-		//log.info("返回结果:"+respMessage);
-		return respMessage;
+    /**
+     * @Title: checkSignature
+     * @Description:接入管理
+     * @author yuanliyang
+     * @date 2018年5月6日 下午3:40:13
+     * @param @param signature
+     * @param @param nonce
+     * @param @param timestamp
+     * @param @param echostr
+     * @param @param account
+     * @param @return 参数
+     * @return String 返回类型
+     * @throws
+     */
+    @RequestMapping(value = "/{account}/message", method = RequestMethod.GET)
+    @ResponseBody
+    public String checkSignature(@RequestParam(name = "signature", required = false) String signature, @RequestParam(name = "nonce", required = false) String nonce, @RequestParam(name = "timestamp", required = false) String timestamp, @RequestParam(name = "echostr", required = false) String echostr, @PathVariable String account) {
+	log.info("get有消息来了！");
+	// 通过检验signature对请求进行校验，若校验成功则原样返回echostr，表示接入成功，否则接入失败
+	log.info("接收参数:" + "===========signature:" + signature + "===========timestamp:" + timestamp + "===========nonce:" + nonce);
+	Boolean flag = false;
+	WxAccount ap = RedisCacheUtil.get(account, WxAccount.class);
+	try {
+	    flag = SignUtil.checkSignature(ap.getToken(), signature, timestamp, nonce);
+	} catch (Exception e) {
+	    flag = false;
 	}
+	if (flag) {
+	    log.info("接入成功");
+	    return echostr;
+	}
+	log.error("接入失败");
+	return "";
+    }
+
+    /**
+     * @Title: weChatMsg
+     * @Description:处理公众号信息
+     * @author yuanliyang
+     * @date 2018年5月6日 下午3:40:28
+     * @param @param req
+     * @param @param rep
+     * @param @param account
+     * @param @return 参数
+     * @return String 返回类型
+     * @throws
+     */
+    @RequestMapping(value = "/{account}/message", method = RequestMethod.POST)
+    @ResponseBody
+    public String weChatMsg(HttpServletRequest req, HttpServletResponse rep, @PathVariable String account) {
+	WxAccount ap = RedisCacheUtil.get(account, WxAccount.class);
+	String respMessage = wxService.processMsg(req, ap);
+	// log.info("返回结果:"+respMessage);
+	return respMessage;
+    }
 }
