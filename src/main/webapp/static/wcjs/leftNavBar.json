@@ -1,0 +1,61 @@
+[
+  {
+    "title": "主页",
+    "icon": "fa fa-home",
+    "href": "#",
+    "spread": false,
+    "children": [
+      {
+        "title": "主页示例一",
+        "href": "static/index_v1.html"
+      },
+      {
+        "title": "主页示例二",
+        "href": "static/index_v2.html"
+      },
+      {
+        "title": "主页示例三",
+        "href": "static/index_v3.html"
+      },
+      {
+        "title": "主页示例四",
+        "href": "static/index_v4.html"
+      },
+      {
+        "title": "主页示例五",
+        "href": "static/index_v5.html"
+      }
+    ]
+  },
+  {
+    "title": "CSS动画",
+    "icon": "fa fa-magic",
+    "href": "static/css_animation.html",
+    "spread": false
+  },
+  {
+    "title": "UI元素",
+    "icon": "fa fa-flask",
+    "href": "#",
+    "children": [
+      {
+        "title": "字体图标",
+        "href": "#",
+        "children": [
+          {
+            "title": "Font Awesome",
+            "href": "static/fontawesome.html"
+          },
+          {
+            "title": "Glyphicon",
+            "href": "static/glyphicons.html"
+          },
+          {
+            "title": "阿里巴巴矢量图标库",
+            "href": "static/iconfont.html"
+          }
+        ]
+      }
+    ]
+  }
+]
