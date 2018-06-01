@@ -22,4 +22,5 @@
 	<util:properties id="wxProperties" location="classpath:properties/wx.properties" />
 	<import resource="classpath*:spring/spring-mybatis.xml" />
 	<import resource="classpath*:spring/spring-redis.xml" />
+	<import resource="classpath*:spring/common.xml" />
 </beans>

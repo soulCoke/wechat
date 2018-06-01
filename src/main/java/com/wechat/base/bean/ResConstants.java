@@ -22,6 +22,11 @@ public enum ResConstants {
     DEL_DATA_FAIL("000008", "删除数据失败"),
     
     UNKNOW_ERROR("082067","未知错误"),
+    
+    IMAGE_IS_OVER_WEIGHT("100000", "图片超过指定大小"),
+    FILE_EXT_IS_NOT_SUPPORTED("100002", "不支持类型"),
+    UPLOAD_FILE_EXCEPTION("100003", "上传失败"),
+    
     ;
 
     private final String code; // 错误码

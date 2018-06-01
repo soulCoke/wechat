@@ -19,6 +19,11 @@ import org.slf4j.LoggerFactory;
 public class ParamsInterceptorHelper {
 	private static final Logger logger = LoggerFactory.getLogger(ParamsInterceptorHelper.class);
 
+	/**   
+	 *
+	 * @author yuanliyang  
+	 * @param request        
+	 */
 	public static void interceporParams(HttpServletRequest request) {
 		Enumeration<String> enums = request.getParameterNames();
 		logger.info("URL=" + request.getRequestURI());

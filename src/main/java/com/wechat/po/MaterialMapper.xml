@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.MaterialMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.entity.Material">
+        <result column="mediaId" property="mediaId" />
+        <result column="type" property="type" />
+        <result column="thumbMediaId" property="thumbMediaId" />
+        <result column="createdAt" property="createdAt" />
+        <result column="netUrl" property="netUrl" />
+        <result column="abPath" property="abPath" />
+        <result column="status" property="status" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        mediaId, type, thumbMediaId, createdAt, netUrl, abPath, status
+    </sql>
+
+	<select id="selectList"  resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column_List" />
+	    from t_material
+	    <where>
+	    </where>
+	</select>
+	
+	<select id="selectByPrimaryKey"  resultMap="BaseResultMap">
+	    select 
+	    <include refid="Base_Column_List" />
+	    from t_material
+	    where id = #{id,jdbcType=VARCHAR}
+	</select>
+
+	<delete id="deleteByPrimaryKey">
+	    delete from t_material
+	    where id = #{id}
+	</delete>  
+
+  <insert id="insert" parameterType="Material">
+    insert into t_material
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="mediaId != null"> mediaId, <if>
+		<if test="type != null"> type, <if>
+		<if test="thumbMediaId != null"> thumbMediaId, <if>
+		<if test="createdAt != null"> createdAt, <if>
+		<if test="netUrl != null"> netUrl, <if>
+		<if test="abPath != null"> abPath, <if>
+		<if test="status != null"> status, <if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="mediaId != null"> mediaId, <if>
+		<if test="type != null"> type, <if>
+		<if test="thumbMediaId != null"> thumbMediaId, <if>
+		<if test="createdAt != null"> createdAt, <if>
+		<if test="netUrl != null"> netUrl, <if>
+		<if test="abPath != null"> abPath, <if>
+		<if test="status != null"> status, <if>
+    </trim>
+  </insert>		
+	
+	<update id="updateByPrimaryKey" parameterType="Material">
+	    update t_material
+	    <set>
+			<if test="mediaId != null"> mediaId = mediaId </if>
+			<if test="type != null"> type = type </if>
+			<if test="thumbMediaId != null"> thumbMediaId = thumbMediaId </if>
+			<if test="createdAt != null"> createdAt = createdAt </if>
+			<if test="netUrl != null"> netUrl = netUrl </if>
+			<if test="abPath != null"> abPath = abPath </if>
+			<if test="status != null"> status = status </if>
+	    </set>
+	    where id = #{id,jdbcType=VARCHAR}
+	</update>
+</mapper>
