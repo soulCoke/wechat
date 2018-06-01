@@ -53,6 +53,7 @@ public class FileUtils {
 	InputStream in = null;
 	int b = 0;
 	String rtPath = null;
+	String abPath = null;
 	File dir = null;
 	String fileName = null;
 	String exitName = null;
@@ -74,25 +75,23 @@ public class FileUtils {
 		    throw new BusinessException(ResConstants.FILE_EXT_IS_NOT_SUPPORTED.getCode(), ResConstants.FILE_EXT_IS_NOT_SUPPORTED.getMsg());
 		}
 		try {
-		    rtPath = subPath + nowTimeStr + "/";
-		    path += rtPath;
-
-		    dir = new File(path);
+		    rtPath = subPath + nowTimeStr;
+		    dir = new File(path+rtPath);
 		    if (!dir.exists()) {
 			dir.mkdirs();
 		    }
 		    fileName = StringUtils4JM.getPicOpenId() + "." + exitName;
-		    path += fileName;
-		    rtPath += fileName;	
+		    rtPath+= "/"+fileName;
+		    abPath=path + rtPath;
 		    //封装文件对象
 		    mf.setName(fileName);
-		    mf.setAbPath(path);
+		    mf.setAbPath(abPath);
 		    mf.setUrlPath(rtPath);
 		    mf.setExitName(exitName);
-		    logger.info("保存完整路径=" + path);
+		    logger.info("保存完整路径=" + abPath);
 		    logger.info("保存静态资源相对路径=" + rtPath);
 		    // 拿到输出流，同时重命名上传的文件
-		    os = new FileOutputStream(path);
+		    os = new FileOutputStream(abPath);
 		    // 拿到上传文件的输入流
 		    in = files[i].getInputStream();
 		    // 以写字节的方式写文件
@@ -103,7 +102,6 @@ public class FileUtils {
 		    os.close();
 		    in.close();
 		    fileList.add(mf);
-		    path = null;
 		} catch (Exception e) {
 		    e.printStackTrace();
 		    logger.error("上传出错");
