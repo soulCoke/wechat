@@ -28,6 +28,12 @@
     ]
   },
   {
+    "title": "素材管理",
+    "icon": "fa fa-magic",
+    "href": "material.html",
+    "spread": false
+  },
+  {
     "title": "CSS动画",
     "icon": "fa fa-magic",
     "href": "static/css_animation.html",

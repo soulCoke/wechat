@@ -24,8 +24,10 @@ import com.wechat.common.utils.StringUtils4JM;
  * @version V1.0
  */
 @Component
+@SuppressWarnings("unused")
 public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
-    private final static Logger logger = LoggerFactory.getLogger(AuthorizationInterceptor.class);
+    
+	private final static Logger logger = LoggerFactory.getLogger(AuthorizationInterceptor.class);
     private static final String POST = "post";
     private static final String GET = "get";
 

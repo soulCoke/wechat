@@ -24,7 +24,8 @@ import com.wechat.po.RespTextMessage;
  * @author yuanliyang
  * @date 2018年5月6日 下午3:43:38  
  * @version V1.0  
-*/  
+*/ 
+@SuppressWarnings("unused")
 public class MessageUtil {
 
     /**
@@ -123,7 +124,7 @@ public class MessageUtil {
      * @return
      * @throws Exception
      */
-    @SuppressWarnings("unchecked")
+    
     //屏蔽某些编译时的警告信息(在强制类型转换的时候编译器会给出警告)
     public static Map<String, String> parseXml(HttpServletRequest request) throws Exception {
         // 将解析结果存储在HashMap中
