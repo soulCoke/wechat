@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -10,11 +11,12 @@
 
 <title>H+ 后台主题UI框架 - css动画</title>
 <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-<meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+<meta name="description"
+	content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
 
 <%@include file="bootstrap_resource.jsp"%>
-<%-- <script src="<%=basePath%>static/wcjs/material.js"></script>
- --%><script>
+<script src="<%=basePath%>static/wcjs/material.js"></script>
+<!-- <script>
 $(document).ready(function() {
 	load_data();
 })
@@ -32,18 +34,30 @@ function load_data(){
 	    url:"/wechat/static/js/demo/bootstrap_table_test2.json"  
 	});  
 }
-</script>
+</script> -->
 </head>
 
 <body class="gray-bg">
 
 	<div class="col-sm-12">
+
 		<!-- Example Card View -->
 		<div class="example-wrap">
-			<h4 class="example-title">素材管理</h4>
+			<h2 class="example-title">素材管理</h2>
+			<div class="btn-group hidden-xs" id="exampleToolbar" role="group">
+				<button type="button" class="btn btn-outline btn-default">
+					<i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+				</button>
+				<button type="button" class="btn btn-outline btn-default">
+					<i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
+				</button>
+				<button type="button" class="btn btn-outline btn-default">
+					<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+				</button>
+			</div>
 			<div class="example">
 				<table id="data_table">
-					
+
 				</table>
 			</div>
 		</div>
